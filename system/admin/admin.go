@@ -55,7 +55,6 @@ var mainAdminHTML = `
                 <div class="card">
                 <ul class="card-content collection">
                     <div class="card-title">Content</div>
-                                    
                     {{ range $t, $f := .Types }}
                     <div class="row collection-item">
                         <li><a class="col s12" href="/admin/contents?type={{ $t }}"><i class="tiny left material-icons">playlist_add</i>{{ $t }}</a></li>

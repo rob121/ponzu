@@ -123,6 +123,7 @@ func Form(post Editable, fields ...Field) ([]byte, error) {
 
 	submit := `
 <div class="input-field post-controls">
+    <a href="/admin/" class="right waves-effect waves-light btn gblue save-post" >Back</a>
 	<button class="right waves-effect waves-light btn green save-post" type="submit">Save</button>
 	<button class="right waves-effect waves-light btn red delete-post" type="submit">Delete</button>
 </div>
