@@ -87,7 +87,7 @@ func DOMElementSelfClose(e *Element) []byte {
 // DOMElementCheckbox is a special DOM element which is parsed as a
 // checkbox input tag and thus needs to be created differently
 func DOMElementCheckbox(e *Element) []byte {
-	_, err := e.ViewBuf.WriteString(`<p class="col s6">`)
+	_, err := e.ViewBuf.WriteString(`<p class="col s8">`)
 	if err != nil {
 		log.Println("Error writing HTML string to buffer: DOMElementCheckbox")
 		return nil
@@ -192,7 +192,7 @@ func DOMElement(e *Element) []byte {
 }
 
 func DOMElementWithChildrenSelect(e *Element, children []*Element) []byte {
-	_, err := e.ViewBuf.WriteString(`<div class="input-field col s6">`)
+	_, err := e.ViewBuf.WriteString(`<div class="input-field col s8">`)
 	if err != nil {
 		log.Println("Error writing HTML string to buffer: DOMElementWithChildrenSelect")
 		return nil

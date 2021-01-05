@@ -104,6 +104,24 @@ func searchContentHandler(res http.ResponseWriter, req *http.Request) {
 		res.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	
+	// assert hookable
+	get := it()
+	hook, ok := get.(item.Hookable)
+	if !ok {
+		log.Println("[Response] error: Type", t, "does not implement item.Hookable or embed item.Item.")
+		res.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	// hook before response
+	j, err = hook.BeforeAPIResponse(res, req, j)
+	if err != nil {
+		log.Println("[Response] error calling BeforeAPIResponse:", err)
+		res.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
 
 	sendData(res, req, j)
 }
