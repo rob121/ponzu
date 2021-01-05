@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"log"
 	"net/http"
+	 "reflect"
+	 "strings"
 )
 
 // Editable ensures data is editable
@@ -60,6 +62,19 @@ func Form(post Editable, fields ...Field) ([]byte, error) {
 		log.Println("Error writing HTML string to editor Form buffer")
 		return nil, err
 	}
+	
+	
+	typ := reflect.TypeOf(post).String()
+	
+	parts := strings.Split(typ,".")
+	
+	var typs string
+	
+	if(len(parts)>0){
+    	
+    	typs = parts[1]
+	}
+	
 
 	publishTime := `
 <div class="row content-only __ponzu">
@@ -123,9 +138,9 @@ func Form(post Editable, fields ...Field) ([]byte, error) {
 
 	submit := `
 <div class="input-field post-controls">
-    <a href="/admin/" class="right waves-effect waves-light btn gblue save-post" >Back</a>
 	<button class="right waves-effect waves-light btn green save-post" type="submit">Save</button>
 	<button class="right waves-effect waves-light btn red delete-post" type="submit">Delete</button>
+    <a href="/admin/contents?type=`+typs+`" class="right waves-effect waves-light btn blue save-post" >Back</a>
 </div>
 `
 	_, ok := post.(Mergeable)
